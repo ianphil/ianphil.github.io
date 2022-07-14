@@ -28,7 +28,7 @@ twitter_username: protoian
 github_username:  ianphil
 
 # Build settings
-theme: minima # jekyll-theme-hacker
+theme: jekyll-theme-hacker # minima
 plugins:
   - jekyll-feed
 
