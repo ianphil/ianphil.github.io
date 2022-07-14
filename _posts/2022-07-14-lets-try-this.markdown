@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Let's Try This..."
-date:   2019-08-05 07:23:10 -0500
-categories: azure acr keyvault
+date:   2022-07-14 12:33:10 -0500
+categories: azure cosmosdb sidecar
 ---
 
 ```csharp
@@ -14,4 +14,4 @@ while(true)
 
 My Blog where I explore, take notes, and yeah whatever. Recently I just pushed this out with Azure CosmosDB team...
 
-[]()
+[Azure Cosmos DB Cross-Partition Query Sidecar](https://github.com/Azure-Samples/Cosmosdb-query-sidecar)
