@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Let's Try This..."
-date:   2022-07-14 12:33:10 -0500
+date:   2022-07-14 11:38:10 -0400
 categories: azure cosmosdb sidecar
 ---
 
