@@ -18,19 +18,22 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: While(true)
+title: Ian Philpot
 email: ian.philpot@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Notes and such
+description: Notes
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://ianphil.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: protoian
+twitter_username: indigophilpot
 github_username:  ianphil
 
 # Build settings
-theme: minima # jekyll-theme-hacker
+#minimal-mistakes-jekyll #minima # jekyll-theme-hacker
+theme: just-the-docs
 plugins:
   - jekyll-feed
+
+# Set a path/url to a favicon that will be displayed by the browser
+favicon_ico: "/assets/images/favicon.ico"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
