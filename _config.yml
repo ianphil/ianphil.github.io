@@ -28,7 +28,8 @@ github_username:  ianphil
 
 # Build settings
 #minimal-mistakes-jekyll #minima # jekyll-theme-hacker
-theme: just-the-docs
+# theme: just-the-docs
+remote_theme: "pmarsceill/just-the-docs"
 plugins:
   - jekyll-feed
 
