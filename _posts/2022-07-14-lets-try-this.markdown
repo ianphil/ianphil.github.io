@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Let's Try This..."
-date:   2022-07-14 11:38:10 -0400
+date:   2022-07-14 12:33:10 -0500
 categories: azure cosmosdb sidecar
 ---
 
@@ -12,6 +12,6 @@ while(true)
 }
 ```
 
-My Blog where I explore, take notes, and yeah whatever. Recently I just pushed this out with Azure CosmosDB team...
+My Blog where I explore, take notes, and yeah whatever. Recently my team pushed this out with Azure CosmosDB team...
 
 [Azure Cosmos DB Cross-Partition Query Sidecar](https://github.com/Azure-Samples/Cosmosdb-query-sidecar)
