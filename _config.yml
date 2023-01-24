@@ -34,7 +34,7 @@ plugins:
   - jekyll-feed
 
 # Set a path/url to a favicon that will be displayed by the browser
-favicon_ico: "/assets/images/favicon.ico"
+favicon_ico: "/favicon.ico"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
