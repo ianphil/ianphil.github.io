@@ -1,3 +1,10 @@
+---
+layout: default
+title: Console App
+permalink: /opentelemetry/console-app
+parent: OpenTelemetry
+---
+
 # Console App 
 I'm adding meters and such to a console app
 

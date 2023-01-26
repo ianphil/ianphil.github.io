@@ -1,3 +1,10 @@
+---
+layout: default
+title: NIP01 Notes
+permalink: /nostr/nip01-notes
+parent: Nostr
+---
+
 # NIP-01 Notes
 
 ## I'm not smart, but I do read
@@ -6,7 +13,7 @@ I'm persistent so let's see if I can pull all this off. It's a lot to put togeth
 
 ## Thoughts 01
 
-I've been messing around with a lot of tech choices for NIP-01. Reading a lot of different thinking about how to implement everything from web sockets, to how to generate signatures. It's been pretty fun digging into stuff I've not messed with in years, and stuff I've never heard about like Schnorr Signatures, or Proof of Work. At this point I've gone through all of the NIPs. I've skimmed over the github issues and PRs. I've looked at a lot of the work that has been done in the community. I've joined the telegram community, I hop on the reddit channel. I'm not a huge fan of reddit, but some of the conversation happens there.
+I've been messing around with a lot of tech choices for NIP-01. Reading a lot of different thinking about how to implement everything from web sockets, to how to generate signatures. It's been pretty fun digging into stuff I've not messed with in years, and stuff I've never heard about like Schnorr Signatures, or Proof of Work. At this point I've gone through all of the NIPs. I've skimmed over the GitHub issues and PRs. I've looked at a lot of the work that has been done in the community. I've joined the telegram community, I hop on the reddit channel. I'm not a huge fan of reddit, but some of the conversation happens there.
 
 As for the work I've done... I've started like 10 different projects messing around with different elements of NIPS-01. It's funny that they say you can build this in a weekend. While I don't think they are wrong... there are a lot of choices that need to be made for architecture and design patterns. Yes, I also over think most things... I typically make them harder than they need to be and I'm a stickler around writing clean maintainable code. So I've spent the last month thinking about Nostr, the way it should work and I still don't think I'm right. I've probably been an engineering manager too long.
 
