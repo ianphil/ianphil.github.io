@@ -2,7 +2,6 @@
 layout: page
 title: About
 description: About me page
-background: '/img/about_header.png'
 ---
 
 # About Ian Philpot

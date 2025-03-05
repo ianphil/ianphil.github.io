@@ -30,8 +30,7 @@ twitter_username: giantcomputerco
 github_username:  ianphil
 
 # Build settings
-# theme: just-the-docs
-theme: jekyll-theme-clean-blog
+theme: just-the-docs
 plugins:
   - jekyll-feed
 
