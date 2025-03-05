@@ -30,7 +30,7 @@ twitter_username: giantcomputerco
 github_username:  ianphil
 
 # Build settings
-theme: just-the-docs
+theme: minima
 plugins:
   - jekyll-feed
 
