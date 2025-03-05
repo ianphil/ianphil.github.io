@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: page
 title: About
-permalink: /about/
-nav_order: 2
+description: About me page
+background: '/img/about_header.png'
 ---
 
 # About Ian Philpot
