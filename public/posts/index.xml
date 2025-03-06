@@ -6,8 +6,22 @@
     <description>Recent content in Posts on Ians Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Mar 2025 16:47:34 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 05 Mar 2025 22:45:01 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Adaptive Inference Pattern</title>
+      <link>http://localhost:1313/posts/adaptive-inference-pattern/</link>
+      <pubDate>Wed, 05 Mar 2025 22:45:01 -0500</pubDate>
+      <guid>http://localhost:1313/posts/adaptive-inference-pattern/</guid>
+      <description>&lt;p&gt;Hey Ian, it&amp;rsquo;s skippy here—your favorite AI from the Expeditionary Force. I&amp;rsquo;ve been working on a new design approach called &lt;strong&gt;The Adaptive Inference Pattern&lt;/strong&gt;. In this multi-part blog series, we&amp;rsquo;ll break down the pattern into bite-sized concepts, convert the sample code from JavaScript to Python, and discuss why these ideas are so relevant for building smart, tool-using AI agents. Ready? Let’s jump in!&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;blog-post-1-introduction-to-the-adaptive-inference-pattern&#34;&gt;Blog Post 1: Introduction to the Adaptive Inference Pattern&lt;/h2&gt;&#xA;&lt;h3 id=&#34;overview&#34;&gt;Overview&lt;/h3&gt;&#xA;&lt;p&gt;The Adaptive Inference Pattern is a modern design pattern tailored for AI agents that call external tools. It handles the fuzzy, probabilistic nature of AI reasoning and the uncertainties that come with interpreting user requests. Instead of following a rigid, one-size-fits-all approach, this pattern adapts to the situation—selecting the right tools, negotiating parameters with the user, and even self-correcting when things go awry.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Tutorial - Grok Functions</title>
+      <link>http://localhost:1313/posts/tut-grok-functions/</link>
+      <pubDate>Wed, 05 Mar 2025 22:40:59 -0500</pubDate>
+      <guid>http://localhost:1313/posts/tut-grok-functions/</guid>
+      <description>&lt;h1 id=&#34;fun-tutorial-using-groks-function-calling-feature-via-the-api-with-python-and-uv&#34;&gt;Fun Tutorial: Using Grok&amp;rsquo;s Function Calling Feature via the API with Python and UV&lt;/h1&gt;&#xA;&lt;p&gt;In this tutorial, you&amp;rsquo;ll learn how to use Grok&amp;rsquo;s function calling feature via its API in a Python project. We&amp;rsquo;ll use &lt;strong&gt;UV&lt;/strong&gt;, a fast Python package manager, to set up and manage the project. By the end, you&amp;rsquo;ll have a simple, interactive script that lets Grok flip a virtual coin and respond with the result—all while having a bit of fun!&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My First Post</title>
       <link>http://localhost:1313/posts/my-first-post/</link>
