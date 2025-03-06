@@ -1,0 +1,38 @@
+[[entries]]
+title = "info"
+
+  [[entries.entries]]
+  title = "I build stuff..."
+
+
+
+[[entries]]
+title = "all posts"
+
+  [entries.post_list]
+  limit = 5
+  section = "posts"
+  show_more = true
+  show_more_text = "See archive..."
+  show_more_url = "posts"
+
+[[entries]]
+title = "rss"
+url = "index.xml"
+
+[[entries]]
+title = "Contact me"
+  [[entries.entries]]
+  title = "About"
+  url = "page/about/"
+
+  [[entries.entries]]
+  title = "Socials:"
+
+    [[entries.entries.entries]]
+    title = "Twitter: giantcomputerco"
+    url = "https://x.com/giantcomputerco"
+
+    [[entries.entries.entries]]
+    title = "GitHub: ianphil"
+    url = "https://github.com/ianphil"
