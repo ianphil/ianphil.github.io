@@ -6,8 +6,15 @@
     <description>Recent content on Ians Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Mar 2025 16:47:34 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 05 Mar 2025 22:21:45 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/page/about/</link>
+      <pubDate>Wed, 05 Mar 2025 22:21:45 -0500</pubDate>
+      <guid>http://localhost:1313/page/about/</guid>
+      <description>&lt;h1 id=&#34;about-ian-philpot&#34;&gt;About Ian Philpot&lt;/h1&gt;&#xA;&lt;p&gt;Hey, I’m Ian—a Principal Engineering Manager at &lt;a href=&#34;https://www.microsoft.com&#34;&gt;Microsoft&lt;/a&gt;, working in the &lt;a href=&#34;https://portal.azure.com&#34;&gt;Azure&lt;/a&gt;. My career has taken me deep multiple industries like energy, transportation, and public sector and now into AI-driven engineering.&lt;/p&gt;&#xA;&lt;h2 id=&#34;a-few-fun-facts-about-me&#34;&gt;A Few Fun Facts About Me:&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I married my best friend over 20 years ago. Still the best decision I’ve ever made.&lt;/li&gt;&#xA;&lt;li&gt;I’ve got three incredible kids who keep life interesting.&lt;/li&gt;&#xA;&lt;li&gt;I volunteer in AV at my church—tech isn&amp;rsquo;t just my job, it&amp;rsquo;s part of who I am.&lt;/li&gt;&#xA;&lt;li&gt;I ride my mountain bike every chance I get. Trails &amp;gt; roads.&lt;/li&gt;&#xA;&lt;li&gt;I write code in a tmp directory, play with it, then throw it away. Learning is the goal.&lt;/li&gt;&#xA;&lt;li&gt;I don&amp;rsquo;t do side projects&amp;hellip; until I do. And when I do, I go all in.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;my-two-passions-cycling--ai-engineering&#34;&gt;My Two Passions: Cycling &amp;amp; AI Engineering&lt;/h2&gt;&#xA;&lt;p&gt;Lately, I’ve been gearing my brand toward two things that drive me: &lt;strong&gt;cycling coaching&lt;/strong&gt; and &lt;strong&gt;AI engineering&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My First Post</title>
       <link>http://localhost:1313/posts/my-first-post/</link>
