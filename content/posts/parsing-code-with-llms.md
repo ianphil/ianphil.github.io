@@ -40,6 +40,7 @@ To understand Aider’s evolution, I examined:
 - **Edit Format Documentation:** [Aider Edit Formats](https://github.com/Aider-AI/aider/blob/main/aider/website/docs/more/edit-formats.md)
 - **Code Structure:**
   - Aider has **coders** and **prompts**, aligning with the edit formats described in the documentation.
+  - Aider prompts the LLM to return using search/replace formatting: [editblock_prompts.py](https://github.com/Aider-AI/aider/blob/4f4b10fd868680e0b87511d4bcf755f198089e8d/aider/coders/editblock_prompts.py#L75)
   - Example: `udiff` format is implemented in [udiff_coder.py](https://github.com/Aider-AI/aider/blob/main/aider/coders/udiff_coder.py)
   - The best editor format is selected dynamically: [model selection logic](https://github.com/Aider-AI/aider/blob/4f4b10fd868680e0b87511d4bcf755f198089e8d/aider/models.py#L321)
   - Early implementation of `editblock_coder`: [editblock_coder.py](https://github.com/Aider-AI/aider/blob/070f0a29195078c514ad1fcb2928c87a68daae52/aider/coders/editblock_coder.py#L154)
