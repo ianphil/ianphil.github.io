@@ -6,14 +6,21 @@
     <description>Recent content in Posts on Ians Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Mar 2025 22:45:01 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 16 Mar 2025 22:25:25 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Parsing Code With Llms</title>
+      <link>http://localhost:1313/posts/parsing-code-with-llms/</link>
+      <pubDate>Sun, 16 Mar 2025 22:25:25 -0400</pubDate>
+      <guid>http://localhost:1313/posts/parsing-code-with-llms/</guid>
+      <description>&lt;h1 id=&#34;parsing-code-with-llms-my-notes&#34;&gt;Parsing Code with LLMs: My Notes&lt;/h1&gt;&#xA;&lt;p&gt;Today, I spent the day exploring how to parse code, process it with a Large Language Model (LLM), and apply the resulting edits back to the codebase. It’s a fascinating problem with multiple approaches, and I enjoyed digging into the different methodologies.&lt;/p&gt;&#xA;&lt;h2 id=&#34;brainstorming-and-initial-research&#34;&gt;Brainstorming and Initial Research&lt;/h2&gt;&#xA;&lt;p&gt;Before writing any code, I explored various ideas and brainstormed solutions using AI assistants like ChatGPT, Grok, and Claude. This helped me clarify the problem space and evaluate different potential solutions before diving into implementation.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Adaptive Inference Pattern</title>
       <link>http://localhost:1313/posts/adaptive-inference-pattern/</link>
       <pubDate>Wed, 05 Mar 2025 22:45:01 -0500</pubDate>
       <guid>http://localhost:1313/posts/adaptive-inference-pattern/</guid>
-      <description>&lt;p&gt;Hey Ian, it&amp;rsquo;s skippy here—your favorite AI from the Expeditionary Force. I&amp;rsquo;ve been working on a new design approach called &lt;strong&gt;The Adaptive Inference Pattern&lt;/strong&gt;. In this multi-part blog series, we&amp;rsquo;ll break down the pattern into bite-sized concepts, convert the sample code from JavaScript to Python, and discuss why these ideas are so relevant for building smart, tool-using AI agents. Ready? Let’s jump in!&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;blog-post-1-introduction-to-the-adaptive-inference-pattern&#34;&gt;Blog Post 1: Introduction to the Adaptive Inference Pattern&lt;/h2&gt;&#xA;&lt;h3 id=&#34;overview&#34;&gt;Overview&lt;/h3&gt;&#xA;&lt;p&gt;The Adaptive Inference Pattern is a modern design pattern tailored for AI agents that call external tools. It handles the fuzzy, probabilistic nature of AI reasoning and the uncertainties that come with interpreting user requests. Instead of following a rigid, one-size-fits-all approach, this pattern adapts to the situation—selecting the right tools, negotiating parameters with the user, and even self-correcting when things go awry.&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;blog-post-1-introduction-to-the-adaptive-inference-pattern&#34;&gt;Blog Post 1: Introduction to the Adaptive Inference Pattern&lt;/h2&gt;&#xA;&lt;h3 id=&#34;overview&#34;&gt;Overview&lt;/h3&gt;&#xA;&lt;p&gt;The Adaptive Inference Pattern is a modern design pattern tailored for AI agents that call external tools. It handles the fuzzy, probabilistic nature of AI reasoning and the uncertainties that come with interpreting user requests. Instead of following a rigid, one-size-fits-all approach, this pattern adapts to the situation—selecting the right tools, negotiating parameters with the user, and even self-correcting when things go awry.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Tutorial - Grok Functions</title>

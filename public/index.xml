@@ -6,8 +6,15 @@
     <description>Recent content on Ians Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Mar 2025 22:45:01 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 16 Mar 2025 22:25:25 -0400</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Parsing Code With Llms</title>
+      <link>http://localhost:1313/posts/parsing-code-with-llms/</link>
+      <pubDate>Sun, 16 Mar 2025 22:25:25 -0400</pubDate>
+      <guid>http://localhost:1313/posts/parsing-code-with-llms/</guid>
+      <description>&lt;h2 id=&#34;my-notes&#34;&gt;My Notes&lt;/h2&gt;&#xA;&lt;p&gt;Today, I spent the day exploring how to parse code, process it with a Large Language Model (LLM), and apply the resulting edits back to the codebase. It’s a fascinating problem with multiple approaches, and I enjoyed digging into the different methodologies.&lt;/p&gt;&#xA;&lt;h2 id=&#34;brainstorming-and-initial-research&#34;&gt;Brainstorming and Initial Research&lt;/h2&gt;&#xA;&lt;p&gt;Before writing any code, I explored various ideas and brainstormed solutions using AI assistants like ChatGPT, Grok, and Claude. This helped me clarify the problem space and evaluate different potential solutions before diving into implementation.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Adaptive Inference Pattern</title>
       <link>http://localhost:1313/posts/adaptive-inference-pattern/</link>

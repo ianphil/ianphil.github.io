@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/adaptive-inference-pattern/</loc>
-    <lastmod>2025-03-05T22:45:01-05:00</lastmod>
+    <loc>http://localhost:1313/posts/parsing-code-with-llms/</loc>
+    <lastmod>2025-03-16T22:25:25-04:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-03-16T22:25:25-04:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/adaptive-inference-pattern/</loc>
     <lastmod>2025-03-05T22:45:01-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/tut-grok-functions/</loc>
