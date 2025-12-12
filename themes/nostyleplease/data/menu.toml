@@ -21,6 +21,10 @@ title = "rss"
 url = "index.xml"
 
 [[entries]]
+title = "tools"
+url = "https://tools.ianp.io"
+
+[[entries]]
 title = "Contact me"
   [[entries.entries]]
   title = "About"
