@@ -7,6 +7,10 @@ on:
     branches:
       - master
 
+  # Rebuild daily at 6:00 AM UTC to publish scheduled posts
+  schedule:
+    - cron: '0 6 * * *'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
