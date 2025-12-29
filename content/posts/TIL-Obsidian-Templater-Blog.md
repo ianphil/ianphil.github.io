@@ -2,6 +2,11 @@
 title: "TIL: Using Obsidian for my Blog"
 date: 2025-12-29T12:52:37-05:00
 draft: false
+tags:
+  - obsidian
+  - hugo
+  - workflow
+  - TIL
 ---
 
 
