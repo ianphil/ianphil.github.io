@@ -1,0 +1,19 @@
+---
+title: "AI Methodologies: Agents do the Work"
+date: 2026-01-07T11:50:00-05:00
+draft: false
+tags:
+  - ai
+---
+## **A Practical Method: Asynchronous Agent Runs With Review Gates**
+
+In many cases, agents are most useful when they can produce a first draft without a human in the chat loop the whole time. Treat these runs like any other automated system: define the inputs, set constraints, execute in a controlled environment, and require verification before changes land. The goal isn’t autonomy for its own sake, it’s predictable progress with clear accountability.
+
+**Habits:**
+
+- **Define prompt inputs** as structured artifacts (issue template, ticket fields, PRD snippets) so runs start from stable, reviewable context.
+- **Use explicit triggers** (webhook, schedule, repo event) and log what triggered the run and why.
+- **Constrain the environment**: least-privilege credentials, scoped repos/services, resource caps, and a clear “no prod writes by default” boundary.
+- **Require evidence**: diffs, tests executed, commands run, and links to logs so reviewers can verify quickly.
+- **Route output through review** (PRs, change requests, or approvals) and keep humans accountable for the final decision.
+- **Iterate the checklist** after each run to tighten constraints and reduce repeated failures.
