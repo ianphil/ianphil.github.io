@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Start with Intent"
-date: 2026-01-04T11:50:00-05:00
+date: 2025-12-28T10:00:00-05:00
 draft: false
 tags:
   - ai

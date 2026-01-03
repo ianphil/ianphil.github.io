@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Do One Thing"
-date: 2026-01-09T11:50:00-05:00
+date: 2026-01-02T10:00:00-05:00
 draft: false
 tags:
   - ai

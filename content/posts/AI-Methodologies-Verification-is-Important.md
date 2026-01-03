@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Verification is Important"
-date: 2026-01-08T11:50:00-05:00
+date: 2026-01-01T10:00:00-05:00
 draft: false
 tags:
   - ai

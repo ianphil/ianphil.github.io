@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Introduction"
-date: 2026-01-02T11:50:00-05:00
+date: 2025-12-27T10:00:00-05:00
 draft: false
 tags:
   - ai

@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Agents Know Nothing"
-date: 2026-01-05T11:50:00-05:00
+date: 2025-12-29T10:00:00-05:00
 draft: false
 tags:
   - ai

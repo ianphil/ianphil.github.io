@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Agents do the Work"
-date: 2026-01-07T11:50:00-05:00
+date: 2025-12-31T10:00:00-05:00
 draft: false
 tags:
   - ai

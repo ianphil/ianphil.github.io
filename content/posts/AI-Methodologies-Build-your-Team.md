@@ -1,6 +1,6 @@
 ---
 title: "AI Methodologies: Build your Team"
-date: 2026-01-10T11:00:00-05:00
+date: 2026-01-03T09:00:00-05:00
 draft: false
 tags:
   - ai
