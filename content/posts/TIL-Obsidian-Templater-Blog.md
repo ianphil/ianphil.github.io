@@ -46,7 +46,7 @@ That's it - the template pre-fills the Hugo front matter, and I start writing. N
 
 ## Images
 
-One quirk: Hugo serves `static/` at the root, so image paths in your posts should be `/images/filename.png` (not `static/images/...`). Obsidian won't preview these correctly, but Hugo renders them fine. Minor annoyance, but livable.
+One quirk: Hugo serves `static/` at the root, so image paths in your posts should be `/images/filename.png` (not `static/images/... `). Obsidian won't preview these correctly, but Hugo renders them fine. Minor annoyance, but livable.
 
 ## Why This Works
 
