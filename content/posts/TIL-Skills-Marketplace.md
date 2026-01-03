@@ -15,7 +15,7 @@ I built a skill and a skill marketplace today. It only took 12 iterations, three
 
 I have this product at work. It's fine. It works. But it was built before anyone thought AI agents would be poking around in our codebases, so its observability is... not great. Imagine trying to debug something while blindfolded. That's what agents experience when they work with it.
 
-So I decided to fix that. Step one: better tests. Not just any tests—tests that an AI could actually use to figure out what went wrong and fix it autonomously.
+So I decided to fix that. Step one: better tests. Not just any tests...tests that an AI could actually use to figure out what went wrong and fix it autonomously.
 
 Related: [Verification is Important](/posts/ai-methodologies-verification-is-important/)
 
@@ -25,7 +25,7 @@ I was doom-scrolling X when I stumbled across [Simon Willison](https://x.com/sim
 
 Let that sink in. 9,200 autonomous test runs. The AI just kept running tests, seeing failures, fixing code, and repeating until everything passed. No human babysitting required.
 
-Then I found [Charlie Marsh](https://x.com/charliermarsh/status/2007117912801427905) from Astral (the `uv` people) talking about their testing approach. They have this thing called [ty_test](https://raw.githubusercontent.com/astral-sh/ruff/refs/heads/main/crates/ty_test/README.md) where tests are written in markdown. Not as documentation that happens to have code snippets—actual executable tests that happen to be readable.
+Then I found [Charlie Marsh](https://x.com/charliermarsh/status/2007117912801427905) from Astral (the `uv` people) talking about their testing approach. They have this thing called [ty_test](https://raw.githubusercontent.com/astral-sh/ruff/refs/heads/main/crates/ty_test/README.md) where tests are written in markdown. Not as documentation that happens to have code snippets...actual executable tests that happen to be readable.
 
 Here's an [example](https://raw.githubusercontent.com/astral-sh/ruff/refs/heads/main/crates/ty_python_semantic/resources/mdtest/typed_dict.md) if you want to see what that looks like.
 
@@ -54,7 +54,7 @@ The first version was too vague. The AI just wrote normal tests with slightly be
 
 The second version I rewrote completely after actually understanding the Ruff pattern. Better, but still missing pieces.
 
-By version four, I realized I needed this to work for multiple languages—Python, Bash, PowerShell, C#, Rust. Each handles errors differently. Python throws exceptions. Rust returns Results. Bash just gives you exit codes and hopes for the best.
+By version four, I realized I needed this to work for multiple languages...Python, Bash, PowerShell, C#, Rust. Each handles errors differently. Python throws exceptions. Rust returns Results. Bash just gives you exit codes and hopes for the best.
 
 Then came the feedback rounds. Turns out "tests should have intent" means nothing if you don't explain that agents will literally cheat if you don't tell them *why* a test matters. Without context, an AI will happily hardcode `if input == -40: return -40` instead of actually implementing the formula.
 
@@ -83,13 +83,13 @@ A perfectly normal, completely useless pytest file. Not markdown. Not a custom r
 
 Turns out "markdown format" to an AI means "write about markdown" not "create markdown files." And "custom test runner" apparently means "use the test runner you already know."
 
-So I added a section called "What This Pattern Produces" that literally spells out: you are creating TWO things—a `.md` file AND a `run_tests.py` script. NOT pytest. NOT jest. NOT xunit.
+So I added a section called "What This Pattern Produces" that literally spells out: you are creating TWO things...a `.md` file AND a `run_tests.py` script. NOT pytest. NOT jest. NOT xunit.
 
 Sometimes you have to treat language models like they're very smart toddlers.
 
 ## Proof It Actually Works
 
-To validate the skill wasn't garbage, I built [packet-groper](https://github.com/ipdelete/packet-groper)—a network scanner that finds live hosts on your subnet. Three sessions:
+To validate the skill wasn't garbage, I built [packet-groper](https://github.com/ipdelete/packet-groper)...a network scanner that finds live hosts on your subnet. Three sessions:
 
 | Session | What Happened |
 |---------|---------------|
