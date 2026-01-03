@@ -12,8 +12,8 @@ In many cases, agents are most useful when they can produce a first draft withou
 **Habits:**
 
 - **Define prompt inputs** as structured artifacts (issue template, ticket fields, PRD snippets) so runs start from stable, reviewable context.
-- **Use explicit triggers** (webhook, schedule, repo event) and log what triggered the run and why.
+- **Use explicit triggers** (webhook, schedule, system event) and log what triggered the run and why.
 - **Constrain the environment**: least-privilege credentials, scoped repos/services, resource caps, and a clear “no prod writes by default” boundary.
-- **Require evidence**: diffs, tests executed, commands run, and links to logs so reviewers can verify quickly.
-- **Route output through review** (PRs, change requests, or approvals) and keep humans accountable for the final decision.
+- **Require evidence**: change artifacts, checks executed, commands run, and links to logs so reviewers can verify quickly.
+- **Route output through review** (change requests or approvals) and keep humans accountable for the final decision.
 - **Iterate the checklist** after each run to tighten constraints and reduce repeated failures.

@@ -12,8 +12,8 @@ When a task repeats, you can capture the pattern as a template that produces a s
 **Habits:**
 
 - Identify one recurring task and draft a template that includes **inputs, constraints, and expected outputs**.
-- Add **verification steps** to every template (tests, linters, acceptance criteria, security checks, diff review).
+- Add **verification steps** to every template (automated checks, acceptance criteria, security checks, change review).
 - Include **failure modes and stop conditions** (when to escalate, when human review is required).
-- Run the template on a small, real example and record **evidence** (links to PRs, test results, logs).
+- Run the template on a small, real example and record **evidence** (links to change requests, verification results, logs).
 - Version templates like code: review changes, track owners, and retire templates that drift or don’t pay off.
 - Refine templates based on outcomes: what broke, what was ambiguous, what checks caught issues.

@@ -14,6 +14,6 @@ When an agent is asked to do everything, it usually does nothing particularly we
 - Define each agent’s job in one sentence (inputs, output shape, and what “done” means).
 - Keep prompts scoped to one outcome; push unrelated context into a separate step or agent.
 - Add explicit constraints (allowed tools, boundaries, and “must not” rules) in the prompt.
-- Require a verification step: checks, diffs, tests, or validation criteria before accepting output.
-- Version prompts like code (change notes, owners, and rollback when a prompt regresses).
+- Require a verification step: checks or validation criteria before accepting output.
+- Version prompts (change notes, owners, and rollback when a prompt regresses).
 - Track per-agent quality (success rate, common failure modes) and iterate intentionally.
