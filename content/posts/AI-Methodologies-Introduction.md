@@ -6,9 +6,9 @@ tags:
   - ai
 ---
 
-This is a series on practical methodologies for working with AI agents. These aren't theoretical frameworks—they're habits and patterns that help engineers and operators get reliable, verifiable results from agent-assisted workflows.
+This is a series on practical methodologies for working with AI agents. These aren't theoretical frameworks...they're habits and patterns that help engineers and operators get reliable, verifiable results from agent-assisted workflows.
 
-The core idea: AI agents produce first drafts, not finished work. The value comes from treating them as collaborators that need clear inputs, constraints, and verification—just like any other tool in your stack.
+The core idea: AI agents produce first drafts, not finished work. The value comes from treating them as collaborators that need clear inputs, constraints, and verification...just like any other tool in your stack.
 
 ## The Series
 
@@ -28,6 +28,6 @@ The core idea: AI agents produce first drafts, not finished work. The value come
 
 ## Why This Matters
 
-Agent tooling is improving fast. 2026 is going to be a good year, and will move fast, having good habits will serve you well. The engineers who will get the most leverage are those who build repeatable processes around it—clear inputs, scoped permissions, verification steps, and iteration based on outcomes.
+Agent tooling is improving fast. 2026 is going to be a good year, and will move fast, having good habits will serve you well. The engineers who will get the most leverage are those who build repeatable processes around it...clear inputs, scoped permissions, verification steps, and iteration based on outcomes.
 
 These posts are meant to be practical. Each one includes habits you can try today.

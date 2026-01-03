@@ -4,7 +4,7 @@ title = 'Tutorial - Grok Functions'
 +++
 # Fun Tutorial: Using Grok's Function Calling Feature via the API with Python and UV
 
-In this tutorial, you'll learn how to use Grok's function calling feature via its API in a Python project. We'll use **UV**, a fast Python package manager, to set up and manage the project. By the end, you'll have a simple, interactive script that lets Grok flip a virtual coin and respond with the result—all while having a bit of fun!
+In this tutorial, you'll learn how to use Grok's function calling feature via its API in a Python project. We'll use **UV**, a fast Python package manager, to set up and manage the project. By the end, you'll have a simple, interactive script that lets Grok flip a virtual coin and respond with the result...all while having a bit of fun!
 
 ---
 
@@ -177,7 +177,7 @@ UV makes running your script a breeze by automatically using the project’s vir
    ```
    The coin landed on heads!
    ```
-   (The result will be random—heads or tails—each time you run it!)
+   (The result will be random...heads or tails...each time you run it!)
 
 ---
 
@@ -235,7 +235,7 @@ while True:
         print(response_message.content)
 ```
 
-Now, run it again with `uv run main.py`, and you can keep chatting with Grok—ask it to flip a coin as many times as you like or try other questions!
+Now, run it again with `uv run main.py`, and you can keep chatting with Grok...ask it to flip a coin as many times as you like or try other questions!
 
 ---
 
@@ -246,4 +246,4 @@ Congrats! You’ve built a fun Python project that uses Grok’s function callin
 - Define a function for Grok to call.
 - Interact with the API to process user requests and function results.
 
-Feel free to expand this by adding more functions—like a joke generator or a random number picker—to see what else Grok can do. With UV keeping your dependencies in check, you’re ready to explore even more exciting projects. Happy coding!
+Feel free to expand this by adding more functions...like a joke generator or a random number picker...to see what else Grok can do. With UV keeping your dependencies in check, you’re ready to explore even more exciting projects. Happy coding!
