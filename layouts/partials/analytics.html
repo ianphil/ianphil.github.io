@@ -1,0 +1,14 @@
+<script>
+(function() {
+  var endpoint = 'https://ianphil--412f8d84e91f11f0bb4242dde27851f2.web.val.run/track';
+  var data = {
+    page: location.pathname,
+    ref: document.referrer ? new URL(document.referrer).hostname : '',
+    w: window.innerWidth
+  };
+  var img = new Image();
+  img.src = endpoint + '?' + Object.keys(data)
+    .map(function(k) { return k + '=' + encodeURIComponent(data[k]); })
+    .join('&');
+})();
+</script>
