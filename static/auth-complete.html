@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication Complete</title>
+  <style>
+    body {
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #000;
+      color: #fff;
+    }
+    .message {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    <p>Authentication successful!</p>
+    <p>Redirecting back to blog...</p>
+  </div>
+
+  <script>
+    // Extract token from hash
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get('token');
+
+    if (token) {
+      // Store token
+      localStorage.setItem('github_token', token);
+
+      // Get return URL
+      const returnTo = localStorage.getItem('auth_return_to') || '/';
+      localStorage.removeItem('auth_return_to');
+
+      // Redirect back to blog
+      window.location.href = `https://blog.ianp.io${returnTo}`;
+    } else {
+      document.querySelector('.message').innerHTML = '<p>Error: No token received</p>';
+    }
+  </script>
+</body>
+</html>
