@@ -40,6 +40,7 @@
 {{ $commentsCSS := resources.Get "css/github-comments.scss" | resources.ToCSS }}
 <link rel="stylesheet" href="{{ $commentsCSS.RelPermalink }}">
 
+<script type="module" src="/auth.js"></script>
 {{ $commentsJS := resources.Get "js/github-comments.js" }}
 <script type="module" src="{{ $commentsJS.RelPermalink }}"></script>
 {{ end }}
