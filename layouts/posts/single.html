@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+<article>
+    <h1>{{ .Title }}</h1>
+
+    {{ if .Params.toc }}
+        <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+            {{ .TableOfContents }}
+        </aside>
+    {{ end }}
+
+    {{ .Content }}
+</article>
+
+{{ if .Params.github_issue }}
+<section id="comments">
+  <h2>Discussion</h2>
+
+  <div id="github-comments"
+       data-issue="{{ .Params.github_issue }}"
+       data-repo="{{ default "ianphil/ianphil.github.io" .Params.github_repo }}">
+    <p>Loading comments...</p>
+  </div>
+
+  <div class="comment-actions">
+    <a href="https://github.com/{{ default "ianphil/ianphil.github.io" .Params.github_repo }}/issues/{{ .Params.github_issue }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="comment-button">
+      Comment on GitHub →
+    </a>
+  </div>
+</section>
+
+{{ $commentsCSS := resources.Get "css/github-comments.scss" | resources.ToCSS }}
+<link rel="stylesheet" href="{{ $commentsCSS.RelPermalink }}">
+
+{{ $commentsJS := resources.Get "js/github-comments.js" }}
+<script src="{{ $commentsJS.RelPermalink }}"></script>
+{{ end }}
+
+{{ end }}
