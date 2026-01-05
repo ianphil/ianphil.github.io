@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments Feed - Blog</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .feed-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .feed-url {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feed-url input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .feed-url button {
+            padding: 10px 20px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .feed-url button:hover {
+            background: #1565c0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            padding: 15px;
+            background: #ffebee;
+            color: #c62828;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to blog</a>
+
+        <header>
+            <h1>Comments RSS Feed</h1>
+            <p>Subscribe to all blog post comments</p>
+        </header>
+
+        <div class="feed-info">
+            <h2 style="margin-bottom: 15px;">Feed URL</h2>
+            <p>Copy this URL to subscribe in your RSS reader:</p>
+            <div class="feed-url">
+                <input type="text"
+                       id="feed-url"
+                       readonly
+                       value="">
+                <button onclick="copyFeedUrl()">Copy</button>
+            </div>
+            <div id="stats" class="stats" style="display: none;"></div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <p>Generating feed...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="feed-preview" style="display: none;">
+            <h2 style="margin-bottom: 15px;">Feed Preview</h2>
+            <pre id="feed-content"></pre>
+        </div>
+    </div>
+
+    <script type="module">
+        const REPO = 'ianphil/ianphil.github.io';
+        const API_BASE = 'https://api.github.com';
+        const BLOG_URL = 'https://blog.ianp.io';
+
+        let feedXml = '';
+
+        /**
+         * Generate RSS feed from comments
+         */
+        async function generateFeed() {
+            const loading = document.getElementById('loading');
+            const errorDiv = document.getElementById('error');
+            const feedPreview = document.getElementById('feed-preview');
+            const feedContent = document.getElementById('feed-content');
+            const statsDiv = document.getElementById('stats');
+
+            loading.style.display = 'block';
+            errorDiv.style.display = 'none';
+            feedPreview.style.display = 'none';
+
+            try {
+                // Fetch issues with blog-post label
+                const issuesResponse = await fetch(
+                    `${API_BASE}/repos/${REPO}/issues?labels=blog-post&state=all&per_page=100`,
+                    {
+                        headers: {
+                            Accept: 'application/vnd.github+json'
+                        }
+                    }
+                );
+
+                if (!issuesResponse.ok) {
+                    throw new Error(`Failed to fetch issues: ${issuesResponse.statusText}`);
+                }
+
+                const issues = await issuesResponse.json();
+
+                // Fetch comments for each issue
+                const commentsPromises = issues.map(async (issue) => {
+                    const commentsResponse = await fetch(
+                        `${API_BASE}/repos/${REPO}/issues/${issue.number}/comments`,
+                        {
+                            headers: {
+                                Accept: 'application/vnd.github+json'
+                            }
+                        }
+                    );
+
+                    if (!commentsResponse.ok) {
+                        console.error(`Failed to fetch comments for issue ${issue.number}`);
+                        return [];
+                    }
+
+                    const comments = await commentsResponse.json();
+
+                    // Add issue metadata to each comment
+                    return comments.map(comment => ({
+                        ...comment,
+                        issue: {
+                            number: issue.number,
+                            title: issue.title,
+                            html_url: issue.html_url
+                        }
+                    }));
+                });
+
+                const commentsArrays = await Promise.all(commentsPromises);
+                const allComments = commentsArrays.flat();
+
+                // Sort by date, newest first
+                allComments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                // Limit to most recent 50 comments
+                const recentComments = allComments.slice(0, 50);
+
+                // Generate RSS XML
+                feedXml = generateRssXml(recentComments);
+
+                // Display feed
+                feedContent.textContent = feedXml;
+                feedPreview.style.display = 'block';
+
+                // Show stats
+                statsDiv.textContent = `Feed contains ${recentComments.length} most recent comments from ${issues.length} posts`;
+                statsDiv.style.display = 'block';
+
+                // Create blob URL for download
+                const blob = new Blob([feedXml], { type: 'application/rss+xml' });
+                const url = URL.createObjectURL(blob);
+                document.getElementById('feed-url').value = url;
+
+            } catch (error) {
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        /**
+         * Escape XML special characters
+         */
+        function escapeXml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&apos;');
+        }
+
+        /**
+         * Generate RSS XML
+         */
+        function generateRssXml(comments) {
+            const now = new Date().toUTCString();
+
+            let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog Comments - ianp.io</title>
+    <link>${BLOG_URL}</link>
+    <description>Latest comments on blog posts at ianp.io</description>
+    <language>en-us</language>
+    <lastBuildDate>${now}</lastBuildDate>
+    <atom:link href="${BLOG_URL}/comments.xml" rel="self" type="application/rss+xml"/>
+`;
+
+            for (const comment of comments) {
+                const title = `${comment.user.login} commented on "${comment.issue.title}"`;
+                const link = comment.html_url;
+                const pubDate = new Date(comment.created_at).toUTCString();
+                const guid = comment.html_url;
+
+                // Truncate description to first 500 chars
+                const description = comment.body.length > 500
+                    ? comment.body.substring(0, 500) + '...'
+                    : comment.body;
+
+                xml += `
+    <item>
+      <title>${escapeXml(title)}</title>
+      <link>${escapeXml(link)}</link>
+      <guid isPermaLink="true">${escapeXml(guid)}</guid>
+      <pubDate>${pubDate}</pubDate>
+      <author>${escapeXml(comment.user.login)}</author>
+      <description>${escapeXml(description)}</description>
+    </item>`;
+            }
+
+            xml += `
+  </channel>
+</rss>`;
+
+            return xml;
+        }
+
+        /**
+         * Copy feed URL to clipboard
+         */
+        window.copyFeedUrl = function() {
+            const input = document.getElementById('feed-url');
+            input.select();
+            document.execCommand('copy');
+
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        };
+
+        /**
+         * Initialize
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            generateFeed();
+        });
+    </script>
+</body>
+</html>
