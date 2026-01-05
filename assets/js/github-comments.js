@@ -2,13 +2,17 @@
  * GitHub Issues Comments Display
  *
  * Fetches and displays comments from a GitHub issue on the blog post.
- * Read-only display for Phase 1 - users redirect to GitHub to comment.
+ * Phase 2: Includes authenticated commenting via OAuth.
  */
+
+import { auth } from '/auth.js';
 
 (function() {
   'use strict';
 
   const GITHUB_API = 'https://api.github.com';
+  let currentRepo = '';
+  let currentIssue = '';
 
   /**
    * Format date to readable format
@@ -188,6 +192,104 @@
   }
 
   /**
+   * Reload comments after posting
+   */
+  async function reloadComments() {
+    const container = document.getElementById('github-comments');
+    if (!container) return;
+
+    container.innerHTML = '<p>Loading comments...</p>';
+    await displayComments(container, currentRepo, currentIssue);
+  }
+
+  /**
+   * Submit a new comment
+   */
+  async function submitComment() {
+    const textarea = document.getElementById('comment-text');
+    const button = document.querySelector('.comment-submit');
+    const errorDiv = document.getElementById('comment-error');
+
+    if (!textarea || !button) return;
+
+    const comment = textarea.value.trim();
+    if (!comment) {
+      errorDiv.textContent = 'Comment cannot be empty';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    // Disable form while submitting
+    textarea.disabled = true;
+    button.disabled = true;
+    button.textContent = 'Posting...';
+    errorDiv.style.display = 'none';
+
+    try {
+      await auth.postComment(currentRepo, currentIssue, comment);
+
+      // Clear form and reload comments
+      textarea.value = '';
+      await reloadComments();
+
+      // Re-enable form
+      textarea.disabled = false;
+      button.disabled = false;
+      button.textContent = 'Post comment';
+
+    } catch (error) {
+      console.error('Failed to post comment:', error);
+      errorDiv.textContent = `Failed to post comment: ${error.message}`;
+      errorDiv.style.display = 'block';
+
+      // Re-enable form
+      textarea.disabled = false;
+      button.disabled = false;
+      button.textContent = 'Post comment';
+    }
+  }
+
+  /**
+   * Create and render the comment form
+   */
+  function renderCommentForm() {
+    const formContainer = document.getElementById('comment-form');
+    if (!formContainer) return;
+
+    if (auth.isLoggedIn()) {
+      // Show comment form for authenticated users
+      formContainer.innerHTML = `
+        <div class="comment-input">
+          <textarea id="comment-text"
+                    placeholder="Write a comment... (Markdown supported)"
+                    rows="4"></textarea>
+          <div id="comment-error" class="comment-form-error" style="display: none;"></div>
+          <div class="comment-form-actions">
+            <button class="comment-submit" onclick="window.submitComment()">Post comment</button>
+            <button class="comment-logout" onclick="window.logoutAndReload()">Sign out</button>
+          </div>
+        </div>
+      `;
+    } else {
+      // Show login button for unauthenticated users
+      formContainer.innerHTML = `
+        <div class="comment-auth">
+          <button class="comment-login" onclick="window.loginWithGitHub()">
+            Sign in with GitHub to comment
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  /**
+   * Global functions for button onclick handlers
+   */
+  window.submitComment = submitComment;
+  window.loginWithGitHub = () => auth.login(window.location.pathname);
+  window.logoutAndReload = () => auth.logout();
+
+  /**
    * Initialize comments on page load
    */
   function init() {
@@ -203,7 +305,12 @@
       return;
     }
 
+    // Store for later use
+    currentRepo = repo;
+    currentIssue = issueNumber;
+
     displayComments(container, repo, issueNumber);
+    renderCommentForm();
   }
 
   // Initialize when DOM is ready

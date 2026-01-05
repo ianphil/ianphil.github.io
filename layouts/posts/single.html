@@ -16,18 +16,23 @@
 <section id="comments">
   <h2>Discussion</h2>
 
+  <!-- Comment form (Phase 2) -->
+  <div id="comment-form"></div>
+
+  <!-- Comments list -->
   <div id="github-comments"
        data-issue="{{ .Params.github_issue }}"
        data-repo="{{ default "ianphil/ianphil.github.io" .Params.github_repo }}">
     <p>Loading comments...</p>
   </div>
 
+  <!-- Fallback: View on GitHub -->
   <div class="comment-actions">
     <a href="https://github.com/{{ default "ianphil/ianphil.github.io" .Params.github_repo }}/issues/{{ .Params.github_issue }}"
        target="_blank"
        rel="noopener noreferrer"
        class="comment-button">
-      Comment on GitHub →
+      View on GitHub →
     </a>
   </div>
 </section>
@@ -36,7 +41,7 @@
 <link rel="stylesheet" href="{{ $commentsCSS.RelPermalink }}">
 
 {{ $commentsJS := resources.Get "js/github-comments.js" }}
-<script src="{{ $commentsJS.RelPermalink }}"></script>
+<script type="module" src="{{ $commentsJS.RelPermalink }}"></script>
 {{ end }}
 
 {{ end }}
