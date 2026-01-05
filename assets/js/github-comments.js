@@ -69,6 +69,71 @@ import { auth } from '/auth.js';
   }
 
   /**
+   * Fetch reactions for a comment
+   */
+  async function fetchReactions(commentId) {
+    try {
+      const response = await fetch(
+        `${GITHUB_API}/repos/${currentRepo}/issues/comments/${commentId}/reactions`,
+        {
+          headers: {
+            'Accept': 'application/vnd.github+json'
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Reactions API error: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Failed to fetch reactions:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Create reactions display
+   */
+  function createReactionsElement(reactions) {
+    if (!reactions || reactions.length === 0) return null;
+
+    // Count reactions by type
+    const reactionCounts = {};
+    const reactionEmojis = {
+      '+1': '👍',
+      '-1': '👎',
+      'laugh': '😄',
+      'hooray': '🎉',
+      'confused': '😕',
+      'heart': '❤️',
+      'rocket': '🚀',
+      'eyes': '👀'
+    };
+
+    reactions.forEach(reaction => {
+      reactionCounts[reaction.content] = (reactionCounts[reaction.content] || 0) + 1;
+    });
+
+    const reactionsDiv = document.createElement('div');
+    reactionsDiv.className = 'comment-reactions';
+
+    Object.entries(reactionCounts).forEach(([type, count]) => {
+      const emoji = reactionEmojis[type];
+      if (!emoji) return;
+
+      const reactionSpan = document.createElement('span');
+      reactionSpan.className = 'reaction';
+      reactionSpan.title = `${count} ${type}`;
+      reactionSpan.textContent = `${emoji} ${count}`;
+      reactionsDiv.appendChild(reactionSpan);
+    });
+
+    return reactionsDiv;
+  }
+
+  /**
    * Create comment HTML element
    */
   async function createCommentElement(comment) {
@@ -109,6 +174,13 @@ import { auth } from '/auth.js';
 
     contentDiv.appendChild(header);
     contentDiv.appendChild(body);
+
+    // Fetch and add reactions (Phase 3)
+    const reactions = await fetchReactions(comment.id);
+    const reactionsElement = createReactionsElement(reactions);
+    if (reactionsElement) {
+      contentDiv.appendChild(reactionsElement);
+    }
 
     commentDiv.appendChild(avatar);
     commentDiv.appendChild(contentDiv);

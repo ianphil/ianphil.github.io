@@ -152,6 +152,31 @@
   }
 }
 
+// Comment reactions (Phase 3)
+.comment-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+
+  .reaction {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border: thin solid;
+    border-radius: 12px;
+    font-family: monospace;
+    opacity: 0.8;
+    cursor: default;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 // Comment actions (button to comment on GitHub)
 .comment-actions {
   margin-top: 2rem;
@@ -326,6 +351,13 @@
 
   .comment-form-actions button,
   .comment-auth button {
+    border-color: $--primary-text-color;
+    background: $--bg-color;
+    color: $--primary-text-color;
+  }
+
+  // Reactions
+  .comment-reactions .reaction {
     border-color: $--primary-text-color;
     background: $--bg-color;
     color: $--primary-text-color;
