@@ -1,10 +1,12 @@
 ---
 title: "AI Methodologies: Verification is Important"
 date: 2026-01-01T10:00:00-05:00
+github_issue: 9
 draft: false
 tags:
   - ai
 ---
+
 ## **A Practical Method: Build Verification Into the Loop**
 
 Agent output is a first draft, not a conclusion. In many cases, the fastest way to trust it is to attach clear acceptance criteria and have the agent produce evidence: automated checks, validation results, and targeted verification. This approach keeps iteration cheap, makes failures obvious, and preserves human accountability with artifacts you can review.

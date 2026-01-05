@@ -1,6 +1,7 @@
 ---
 title: Privacy-Friendly Blog Analytics (Without Selling Your Soul to Google)
 date: 2026-01-12T23:00:00-05:00
+github_issue: 10
 draft: false
 tags:
   - tools

@@ -1,6 +1,7 @@
 ---
 title: "TIL: Using Obsidian for my Blog"
 date: 2025-12-29T12:52:37-05:00
+github_issue: 12
 draft: false
 tags:
   - obsidian
@@ -8,7 +9,6 @@ tags:
   - workflow
   - TIL
 ---
-
 
 I wanted a simple way to write blog posts without opening VS Code. Obsidian turned out to be perfect for this.
 

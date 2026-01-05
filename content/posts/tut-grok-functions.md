@@ -1,6 +1,7 @@
 +++
 date = '2025-03-05T22:40:59-05:00'
 title = 'Tutorial - Grok Functions'
+github_issue = 17
 +++
 # Fun Tutorial: Using Grok's Function Calling Feature via the API with Python and UV
 

@@ -1,6 +1,7 @@
 ---
 title: "AI Methodologies: Introduction"
 date: 2025-12-27T10:00:00-05:00
+github_issue: 6
 draft: false
 tags:
   - ai

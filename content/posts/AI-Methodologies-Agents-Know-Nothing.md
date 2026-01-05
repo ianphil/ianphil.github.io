@@ -1,10 +1,12 @@
 ---
 title: "AI Methodologies: Agents Know Nothing"
 date: 2025-12-29T10:00:00-05:00
+github_issue: 1
 draft: false
 tags:
   - ai
 ---
+
 ## **A Practical Method: Make Context a First-Class Input**
 
 Agents are most effective when they start with the same inputs a human would use: goals, constraints, relevant code and docs, and the right tools. The output is usually a first draft, so aim to make it easy to verify and hard to misunderstand. A good default is to ask: “With the context, constraints, and tools provided, can this task be completed without guessing?”

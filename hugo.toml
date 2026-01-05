@@ -3,3 +3,12 @@ languageCode = 'en-us'
 title = "Ian's Blog"
 theme = 'nostyleplease'
 ignoreFiles = ['_templates/']
+
+[outputs]
+home = ['HTML', 'RSS', 'comments']
+
+[outputFormats.comments]
+mediaType = 'application/rss+xml'
+baseName = 'comments'
+isPlainText = false
+notAlternative = true

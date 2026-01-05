@@ -1,10 +1,12 @@
 ---
 title: "AI Methodologies: Agents do the Work"
 date: 2025-12-31T10:00:00-05:00
+github_issue: 2
 draft: false
 tags:
   - ai
 ---
+
 ## **A Practical Method: Asynchronous Agent Runs With Review Gates**
 
 In many cases, agents are most useful when they can produce a first draft without a human in the chat loop the whole time. Treat these runs like any other automated system: define the inputs, set constraints, execute in a controlled environment, and require verification before changes land. The goal isn’t autonomy for its own sake, it’s predictable progress with clear accountability.

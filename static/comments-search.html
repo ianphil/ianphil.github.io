@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Comments - Blog</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        select, input[type="text"], input[type="date"] {
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .stats {
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            padding: 15px;
+            background: #ffebee;
+            color: #c62828;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .results {
+            list-style: none;
+        }
+
+        .result-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+            transition: box-shadow 0.2s;
+        }
+
+        .result-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result-header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .result-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .result-author {
+            font-weight: 600;
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .result-author:hover {
+            text-decoration: underline;
+        }
+
+        .result-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .result-issue {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .result-issue-link {
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .result-issue-link:hover {
+            text-decoration: underline;
+        }
+
+        .result-body {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .result-body mark {
+            background: #fff59d;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .result-actions a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .result-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to blog</a>
+
+        <header>
+            <h1>Search Comments</h1>
+            <p>Search across all blog post comments</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text"
+                   id="search-input"
+                   class="search-input"
+                   placeholder="Search comments..."
+                   autofocus>
+        </div>
+
+        <div class="filters">
+            <select id="sort-filter">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="relevance">Most relevant</option>
+            </select>
+
+            <input type="text"
+                   id="author-filter"
+                   placeholder="Filter by author...">
+
+            <input type="date"
+                   id="date-from"
+                   placeholder="From date">
+
+            <input type="date"
+                   id="date-to"
+                   placeholder="To date">
+        </div>
+
+        <div id="stats" class="stats" style="display: none;"></div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <p>Loading comments...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <ul id="results" class="results"></ul>
+    </div>
+
+    <script type="module">
+        const REPO = 'ianphil/ianphil.github.io';
+        const API_BASE = 'https://api.github.com';
+        const CACHE_KEY = 'blog_comments_cache';
+        const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+        let allComments = [];
+        let filteredComments = [];
+
+        /**
+         * Load comments from cache or fetch from API
+         */
+        async function loadComments() {
+            const loading = document.getElementById('loading');
+            const errorDiv = document.getElementById('error');
+
+            loading.style.display = 'block';
+            errorDiv.style.display = 'none';
+
+            try {
+                // Try to load from cache
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    const { timestamp, data } = JSON.parse(cached);
+                    if (Date.now() - timestamp < CACHE_DURATION) {
+                        allComments = data;
+                        updateDisplay();
+                        loading.style.display = 'none';
+                        return;
+                    }
+                }
+
+                // Fetch issues with blog-post label
+                const issuesResponse = await fetch(
+                    `${API_BASE}/repos/${REPO}/issues?labels=blog-post&state=all&per_page=100`,
+                    {
+                        headers: {
+                            Accept: 'application/vnd.github+json'
+                        }
+                    }
+                );
+
+                if (!issuesResponse.ok) {
+                    throw new Error(`Failed to fetch issues: ${issuesResponse.statusText}`);
+                }
+
+                const issues = await issuesResponse.json();
+
+                // Fetch comments for each issue
+                const commentsPromises = issues.map(async (issue) => {
+                    const commentsResponse = await fetch(
+                        `${API_BASE}/repos/${REPO}/issues/${issue.number}/comments`,
+                        {
+                            headers: {
+                                Accept: 'application/vnd.github+json'
+                            }
+                        }
+                    );
+
+                    if (!commentsResponse.ok) {
+                        console.error(`Failed to fetch comments for issue ${issue.number}`);
+                        return [];
+                    }
+
+                    const comments = await commentsResponse.json();
+
+                    // Add issue metadata to each comment
+                    return comments.map(comment => ({
+                        ...comment,
+                        issue: {
+                            number: issue.number,
+                            title: issue.title,
+                            html_url: issue.html_url
+                        }
+                    }));
+                });
+
+                const commentsArrays = await Promise.all(commentsPromises);
+                allComments = commentsArrays.flat();
+
+                // Cache the results
+                localStorage.setItem(CACHE_KEY, JSON.stringify({
+                    timestamp: Date.now(),
+                    data: allComments
+                }));
+
+                updateDisplay();
+            } catch (error) {
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        /**
+         * Escape HTML
+         */
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        /**
+         * Highlight search terms
+         */
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) return escapeHtml(text);
+
+            const escaped = escapeHtml(text);
+            const regex = new RegExp(`(${escapeHtml(searchTerm)})`, 'gi');
+            return escaped.replace(regex, '<mark>$1</mark>');
+        }
+
+        /**
+         * Calculate relevance score
+         */
+        function calculateRelevance(comment, searchTerm) {
+            if (!searchTerm) return 0;
+
+            const term = searchTerm.toLowerCase();
+            const body = comment.body.toLowerCase();
+            const author = comment.user.login.toLowerCase();
+
+            let score = 0;
+
+            // Count occurrences in body
+            const bodyMatches = (body.match(new RegExp(term, 'g')) || []).length;
+            score += bodyMatches * 10;
+
+            // Bonus for author match
+            if (author.includes(term)) {
+                score += 20;
+            }
+
+            // Bonus for exact match in first 100 chars
+            if (body.substring(0, 100).includes(term)) {
+                score += 5;
+            }
+
+            return score;
+        }
+
+        /**
+         * Filter and sort comments
+         */
+        function filterComments() {
+            const searchTerm = document.getElementById('search-input').value.trim();
+            const sortBy = document.getElementById('sort-filter').value;
+            const authorFilter = document.getElementById('author-filter').value.trim().toLowerCase();
+            const dateFrom = document.getElementById('date-from').value;
+            const dateTo = document.getElementById('date-to').value;
+
+            // Filter comments
+            filteredComments = allComments.filter(comment => {
+                // Search term filter
+                if (searchTerm) {
+                    const searchLower = searchTerm.toLowerCase();
+                    const matchBody = comment.body.toLowerCase().includes(searchLower);
+                    const matchAuthor = comment.user.login.toLowerCase().includes(searchLower);
+                    const matchIssue = comment.issue.title.toLowerCase().includes(searchLower);
+
+                    if (!matchBody && !matchAuthor && !matchIssue) {
+                        return false;
+                    }
+                }
+
+                // Author filter
+                if (authorFilter && !comment.user.login.toLowerCase().includes(authorFilter)) {
+                    return false;
+                }
+
+                // Date range filter
+                const commentDate = new Date(comment.created_at).toISOString().split('T')[0];
+
+                if (dateFrom && commentDate < dateFrom) {
+                    return false;
+                }
+
+                if (dateTo && commentDate > dateTo) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            // Sort comments
+            if (sortBy === 'newest') {
+                filteredComments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            } else if (sortBy === 'oldest') {
+                filteredComments.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+            } else if (sortBy === 'relevance') {
+                filteredComments.sort((a, b) => {
+                    return calculateRelevance(b, searchTerm) - calculateRelevance(a, searchTerm);
+                });
+            }
+        }
+
+        /**
+         * Format date
+         */
+        function formatDate(isoDate) {
+            const date = new Date(isoDate);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        /**
+         * Truncate text
+         */
+        function truncate(text, maxLength) {
+            if (text.length <= maxLength) return text;
+            return text.substring(0, maxLength) + '...';
+        }
+
+        /**
+         * Update display
+         */
+        function updateDisplay() {
+            filterComments();
+
+            const statsDiv = document.getElementById('stats');
+            const resultsDiv = document.getElementById('results');
+            const searchTerm = document.getElementById('search-input').value.trim();
+
+            // Update stats
+            statsDiv.style.display = 'block';
+            statsDiv.textContent = `Showing ${filteredComments.length} of ${allComments.length} comments`;
+
+            // Display results
+            if (filteredComments.length === 0) {
+                resultsDiv.innerHTML = `
+                    <li class="no-results">
+                        ${searchTerm ? 'No comments found matching your search.' : 'No comments yet.'}
+                    </li>
+                `;
+                return;
+            }
+
+            resultsDiv.innerHTML = filteredComments.map(comment => `
+                <li class="result-item">
+                    <div class="result-header">
+                        <img src="${comment.user.avatar_url}&s=80"
+                             alt="${escapeHtml(comment.user.login)}"
+                             class="result-avatar"
+                             loading="lazy">
+                        <div>
+                            <a href="${comment.user.html_url}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="result-author">${escapeHtml(comment.user.login)}</a>
+                            <div class="result-date">${formatDate(comment.created_at)}</div>
+                        </div>
+                    </div>
+
+                    <div class="result-issue">
+                        on <a href="${comment.issue.html_url}"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="result-issue-link">${highlightText(comment.issue.title, searchTerm)}</a>
+                    </div>
+
+                    <div class="result-body">
+                        ${highlightText(truncate(comment.body, 300), searchTerm)}
+                    </div>
+
+                    <div class="result-actions">
+                        <a href="${comment.html_url}" target="_blank" rel="noopener noreferrer">
+                            View comment →
+                        </a>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        /**
+         * Setup event listeners
+         */
+        function setupEventListeners() {
+            const searchInput = document.getElementById('search-input');
+            const sortFilter = document.getElementById('sort-filter');
+            const authorFilter = document.getElementById('author-filter');
+            const dateFrom = document.getElementById('date-from');
+            const dateTo = document.getElementById('date-to');
+
+            // Debounce search input
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    updateDisplay();
+                }, 300);
+            });
+
+            sortFilter.addEventListener('change', updateDisplay);
+            authorFilter.addEventListener('input', updateDisplay);
+            dateFrom.addEventListener('change', updateDisplay);
+            dateTo.addEventListener('change', updateDisplay);
+        }
+
+        /**
+         * Initialize
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            loadComments();
+        });
+    </script>
+</body>
+</html>
