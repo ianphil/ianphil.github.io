@@ -2,6 +2,7 @@
 date = '2025-03-16T22:25:25-04:00'
 draft = false
 title = 'Parsing Code With LLMs'
+github_issue = 16
 +++
 
 ## My Notes
