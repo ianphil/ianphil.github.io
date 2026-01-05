@@ -131,10 +131,20 @@ jobs:
               console.log(`Created issue #${issue.data.number} for ${file}`);
 
               // Update frontmatter with github_issue
-              const updatedContent = content.replace(
-                /^(---\n[\s\S]*?)(github_issue:\s*$)/m,
-                `$1github_issue: ${issue.data.number}`
-              );
+              let updatedContent;
+              if (content.match(/^github_issue:\s*$/m)) {
+                // Replace empty github_issue field
+                updatedContent = content.replace(
+                  /^github_issue:\s*$/m,
+                  `github_issue: ${issue.data.number}`
+                );
+              } else {
+                // Insert github_issue field after title
+                updatedContent = content.replace(
+                  /^(---\n[\s\S]*?^title:.*?\n)/m,
+                  `$1github_issue: ${issue.data.number}\n`
+                );
+              }
 
               fs.writeFileSync(filePath, updatedContent);
               console.log(`Updated ${file} with issue number`);
