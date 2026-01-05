@@ -154,11 +154,76 @@ import { auth } from '/auth.js';
   }
 
   /**
+   * Detect @mention in comment body
+   */
+  function detectMention(commentBody) {
+    // Match @username at the start of the comment
+    const match = commentBody.match(/^@(\w+)/);
+    return match ? match[1] : null;
+  }
+
+  /**
+   * Find parent comment by username mention
+   */
+  function findParentComment(comments, mentionedUser, currentIndex) {
+    // Look backwards for the most recent comment by the mentioned user
+    for (let i = currentIndex - 1; i >= 0; i--) {
+      if (comments[i].user.login === mentionedUser) {
+        return comments[i];
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Create "replying to" element
+   */
+  function createReplyIndicator(parentComment) {
+    const replyDiv = document.createElement('div');
+    replyDiv.className = 'comment-reply-to';
+    replyDiv.innerHTML = `
+      <span class="reply-indicator">↳ replying to</span>
+      <a href="#comment-${parentComment.id}"
+         class="reply-author"
+         title="Jump to parent comment">@${parentComment.user.login}</a>
+    `;
+    return replyDiv;
+  }
+
+  /**
+   * Create "reply" action button
+   */
+  function createReplyButton(username) {
+    const replyBtn = document.createElement('button');
+    replyBtn.className = 'comment-reply-btn';
+    replyBtn.textContent = 'Reply';
+    replyBtn.onclick = () => {
+      const textarea = document.getElementById('comment-text');
+      if (textarea) {
+        textarea.value = `@${username} `;
+        textarea.focus();
+        textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+    return replyBtn;
+  }
+
+  /**
    * Create comment HTML element
    */
-  async function createCommentElement(comment) {
+  async function createCommentElement(comment, allComments, index) {
     const commentDiv = document.createElement('div');
     commentDiv.className = 'github-comment';
+    commentDiv.id = `comment-${comment.id}`;
+
+    // Detect if this is a reply
+    const mentionedUser = detectMention(comment.body);
+    const parentComment = mentionedUser ? findParentComment(allComments, mentionedUser, index) : null;
+
+    // Add threading class if this is a reply
+    if (parentComment) {
+      commentDiv.classList.add('is-reply');
+    }
 
     const avatar = document.createElement('img');
     avatar.className = 'comment-avatar';
@@ -188,11 +253,17 @@ import { auth } from '/auth.js';
     header.appendChild(document.createTextNode(' commented '));
     header.appendChild(timestamp);
 
+    contentDiv.appendChild(header);
+
+    // Add reply indicator if this is a reply
+    if (parentComment) {
+      contentDiv.appendChild(createReplyIndicator(parentComment));
+    }
+
     const body = document.createElement('div');
     body.className = 'comment-body';
     body.innerHTML = await renderMarkdown(comment.body);
 
-    contentDiv.appendChild(header);
     contentDiv.appendChild(body);
 
     // Fetch and add reactions (Phase 3)
@@ -201,6 +272,12 @@ import { auth } from '/auth.js';
     if (reactionsElement) {
       contentDiv.appendChild(reactionsElement);
     }
+
+    // Add reply button (Phase 3.5)
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'comment-actions';
+    actionsDiv.appendChild(createReplyButton(comment.user.login));
+    contentDiv.appendChild(actionsDiv);
 
     commentDiv.appendChild(avatar);
     commentDiv.appendChild(contentDiv);
@@ -269,8 +346,8 @@ import { auth } from '/auth.js';
       container.appendChild(countDiv);
 
       // Render each comment
-      for (const comment of comments) {
-        const commentElement = await createCommentElement(comment);
+      for (let i = 0; i < comments.length; i++) {
+        const commentElement = await createCommentElement(comments[i], comments, i);
         container.appendChild(commentElement);
       }
 

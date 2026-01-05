@@ -177,8 +177,65 @@
   }
 }
 
-// Comment actions (button to comment on GitHub)
-.comment-actions {
+// Comment threading (Phase 3.5)
+.github-comment.is-reply {
+  margin-left: 2rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    opacity: 0.3;
+  }
+}
+
+.comment-reply-to {
+  font-family: monospace;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+
+  .reply-indicator {
+    margin-right: 0.25rem;
+  }
+
+  .reply-author {
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.comment-reply-btn {
+  padding: 0.25rem 0.75rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  border: thin solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Comment actions (within individual comment)
+.github-comment .comment-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+// Comment actions section (button to comment on GitHub)
+#comments > .comment-actions {
   margin-top: 2rem;
   text-align: center;
 }
@@ -358,6 +415,17 @@
 
   // Reactions
   .comment-reactions .reaction {
+    border-color: $--primary-text-color;
+    background: $--bg-color;
+    color: $--primary-text-color;
+  }
+
+  // Threading
+  .github-comment.is-reply::before {
+    background: $--primary-text-color;
+  }
+
+  .comment-reply-btn {
     border-color: $--primary-text-color;
     background: $--bg-color;
     color: $--primary-text-color;
