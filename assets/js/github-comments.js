@@ -11,8 +11,28 @@ import { auth } from '/auth.js';
   'use strict';
 
   const GITHUB_API = 'https://api.github.com';
+  const ANALYTICS_ENDPOINT = 'https://ianphil--412f8d84e91f11f0bb4242dde27851f2.web.val.run/track';
   let currentRepo = '';
   let currentIssue = '';
+
+  /**
+   * Track analytics event
+   */
+  function trackEvent(event, metadata = {}) {
+    try {
+      const data = {
+        page: location.pathname,
+        event: `comment_${event}`,
+        ...metadata
+      };
+      const img = new Image();
+      img.src = ANALYTICS_ENDPOINT + '?' + Object.keys(data)
+        .map(k => k + '=' + encodeURIComponent(data[k]))
+        .join('&');
+    } catch (error) {
+      console.error('Analytics tracking failed:', error);
+    }
+  }
 
   /**
    * Format date to readable format
@@ -228,6 +248,9 @@ import { auth } from '/auth.js';
     try {
       const comments = await fetchComments(repo, issueNumber);
 
+      // Track comment section view
+      trackEvent('view', { count: comments.length });
+
       // Clear loading message
       container.innerHTML = '';
 
@@ -252,6 +275,7 @@ import { auth } from '/auth.js';
       }
 
     } catch (error) {
+      trackEvent('error', { error: error.message });
       container.innerHTML = '';
       const errorDiv = document.createElement('div');
       errorDiv.className = 'comments-error';
@@ -291,6 +315,9 @@ import { auth } from '/auth.js';
       return;
     }
 
+    // Track comment submission attempt
+    trackEvent('submit_start', { length: comment.length });
+
     // Disable form while submitting
     textarea.disabled = true;
     button.disabled = true;
@@ -299,6 +326,9 @@ import { auth } from '/auth.js';
 
     try {
       await auth.postComment(currentRepo, currentIssue, comment);
+
+      // Track successful submission
+      trackEvent('submit_success');
 
       // Clear form and reload comments
       textarea.value = '';
@@ -311,6 +341,10 @@ import { auth } from '/auth.js';
 
     } catch (error) {
       console.error('Failed to post comment:', error);
+
+      // Track failed submission
+      trackEvent('submit_error', { error: error.message });
+
       errorDiv.textContent = `Failed to post comment: ${error.message}`;
       errorDiv.style.display = 'block';
 
@@ -358,8 +392,14 @@ import { auth } from '/auth.js';
    * Global functions for button onclick handlers
    */
   window.submitComment = submitComment;
-  window.loginWithGitHub = () => auth.login(window.location.pathname);
-  window.logoutAndReload = () => auth.logout();
+  window.loginWithGitHub = () => {
+    trackEvent('login_click');
+    auth.login(window.location.pathname);
+  };
+  window.logoutAndReload = () => {
+    trackEvent('logout');
+    auth.logout();
+  };
 
   /**
    * Initialize comments on page load
