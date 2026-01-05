@@ -1,0 +1,152 @@
+name: Create GitHub Issues for Blog Posts
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/posts/**/*.md'
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Find posts without GitHub issues
+        id: find-posts
+        run: |
+          # Create a script to find posts missing github_issue
+          cat > /tmp/find-posts.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const postsDir = './content/posts';
+          const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+
+          const postsWithoutIssues = [];
+
+          files.forEach(file => {
+            const content = fs.readFileSync(path.join(postsDir, file), 'utf8');
+
+            // Check if frontmatter has github_issue field set
+            const issueMatch = content.match(/^github_issue:\s*(\d+)?/m);
+
+            if (!issueMatch || !issueMatch[1]) {
+              postsWithoutIssues.push(file);
+            }
+          });
+
+          if (postsWithoutIssues.length > 0) {
+            console.log('Posts without issues:', postsWithoutIssues.join(','));
+            console.log('count=' + postsWithoutIssues.length);
+          } else {
+            console.log('count=0');
+          }
+          EOF
+
+          node /tmp/find-posts.js >> $GITHUB_OUTPUT
+
+      - name: Create GitHub issues for new posts
+        if: steps.find-posts.outputs.count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const postsDir = './content/posts';
+            const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+
+            for (const file of files) {
+              const filePath = path.join(postsDir, file);
+              const content = fs.readFileSync(filePath, 'utf8');
+
+              // Check if post already has github_issue
+              const issueMatch = content.match(/^github_issue:\s*(\d+)/m);
+              if (issueMatch && issueMatch[1]) {
+                console.log(`Skipping ${file} - already has issue #${issueMatch[1]}`);
+                continue;
+              }
+
+              // Parse frontmatter
+              const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+              if (!frontmatterMatch) {
+                console.log(`Skipping ${file} - no frontmatter found`);
+                continue;
+              }
+
+              const frontmatter = frontmatterMatch[1];
+              const titleMatch = frontmatter.match(/^title:\s*["']?(.+?)["']?$/m);
+              const tagsMatch = frontmatter.match(/^tags:\s*\[(.*?)\]/m);
+              const draftMatch = frontmatter.match(/^draft:\s*(true|false)/m);
+
+              // Skip draft posts
+              if (draftMatch && draftMatch[1] === 'true') {
+                console.log(`Skipping ${file} - draft post`);
+                continue;
+              }
+
+              if (!titleMatch) {
+                console.log(`Skipping ${file} - no title found`);
+                continue;
+              }
+
+              const title = titleMatch[1];
+              const postContent = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+              const slug = path.basename(file, '.md');
+              const blogUrl = `https://blog.ianp.io/posts/${slug}/`;
+
+              // Parse tags
+              let labels = ['blog-post'];
+              if (tagsMatch) {
+                const tags = tagsMatch[1].split(',').map(t => t.trim().replace(/["']/g, ''));
+                labels = labels.concat(tags.filter(t => t.length > 0));
+              }
+
+              // Create issue body
+              const issueBody = `${postContent}\n\n---\n\n📝 Read on blog: ${blogUrl}`;
+
+              // Create the issue
+              console.log(`Creating issue for: ${title}`);
+              const issue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: issueBody,
+                labels: labels
+              });
+
+              console.log(`Created issue #${issue.data.number} for ${file}`);
+
+              // Update frontmatter with github_issue
+              const updatedContent = content.replace(
+                /^(---\n[\s\S]*?)(github_issue:\s*$)/m,
+                `$1github_issue: ${issue.data.number}`
+              );
+
+              fs.writeFileSync(filePath, updatedContent);
+              console.log(`Updated ${file} with issue number`);
+            }
+
+      - name: Commit updated frontmatter
+        if: steps.find-posts.outputs.count > 0
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/posts/*.md
+          git diff --staged --quiet || git commit -m "Add GitHub issue numbers to posts
+
+          🤖 Automated by create-post-issues workflow"
+          git push
