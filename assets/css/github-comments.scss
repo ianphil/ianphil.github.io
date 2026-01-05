@@ -1,0 +1,245 @@
+/**
+ * GitHub Comments Styles
+ *
+ * Matches nostyleplease theme aesthetic with light/dark mode support
+ */
+
+// Import theme mixins from main stylesheet
+@import "../../themes/nostyleplease/assets/css/main.scss";
+
+// Comments section
+#comments {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: thin solid;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Comments container
+#github-comments {
+  margin: 1.5rem 0;
+}
+
+// Comment count
+.comments-count {
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+// Empty state
+.comments-empty {
+  font-style: italic;
+  opacity: 0.7;
+  margin: 2rem 0;
+}
+
+// Error state
+.comments-error {
+  padding: 1rem;
+  margin: 1rem 0;
+  border: thin solid;
+  font-family: monospace;
+
+  p { margin: 0.5rem 0; }
+  p:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; }
+
+  a { text-decoration: underline; }
+}
+
+// Individual comment
+.github-comment {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: thin solid;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+// Comment avatar
+.comment-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+// Comment content
+.comment-content {
+  flex: 1;
+  min-width: 0; // Allow flex item to shrink below content size
+}
+
+// Comment header
+.comment-header {
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+// Comment author
+.comment-author {
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Comment date
+.comment-date {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+// Comment body
+.comment-body {
+  font-family: monospace;
+  line-height: 1.6;
+
+  // Reset margins for first/last elements
+  > *:first-child { margin-top: 0; }
+  > *:last-child { margin-bottom: 0; }
+
+  // Style markdown elements
+  p { margin: 0.75rem 0; }
+
+  pre {
+    padding: 0.75rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  code:not(pre > code) {
+    padding: 0.1em 0.2em;
+    font-size: 90%;
+  }
+
+  blockquote {
+    border-left: 2px solid;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    opacity: 0.8;
+  }
+
+  ul, ol {
+    margin: 0.75rem 0;
+    padding-left: 2rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+
+  hr {
+    border: 0;
+    border-top: thin solid;
+    margin: 1.5rem 0;
+  }
+}
+
+// Comment actions (button to comment on GitHub)
+.comment-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.comment-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-family: monospace;
+  font-size: 1rem;
+  text-decoration: none;
+  border: thin solid;
+  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration: none;
+    opacity: 0.8;
+  }
+}
+
+// Responsive design for mobile
+@media (max-width: 600px) {
+  .github-comment {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .comment-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-header {
+    font-size: 0.85rem;
+  }
+
+  .comment-body {
+    font-size: 0.95rem;
+  }
+}
+
+// Theme-specific styling using existing mixins
+@mixin comments-theme($--primary-text-color, $--bg-color) {
+  #comments {
+    border-top-color: $--primary-text-color;
+  }
+
+  .github-comment {
+    border-color: $--primary-text-color;
+  }
+
+  .comments-error {
+    border-color: $--primary-text-color;
+  }
+
+  .comment-button {
+    border-color: $--primary-text-color;
+  }
+
+  .comment-body {
+    blockquote {
+      border-left-color: $--primary-text-color;
+    }
+
+    hr {
+      border-top-color: $--primary-text-color;
+    }
+  }
+}
+
+// Apply theme styles
+body[a="dark"] {
+  @include comments-theme(#ffffff, #000000);
+}
+
+body[a="light"] {
+  @include comments-theme(#000000, #ffffff);
+}
+
+@media (prefers-color-scheme: dark) {
+  body[a="auto"] {
+    @include comments-theme(#ffffff, #000000);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body[a="auto"] {
+    @include comments-theme(#000000, #ffffff);
+  }
+}
