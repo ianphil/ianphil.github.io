@@ -29,7 +29,7 @@ I wanted my static site tools to authenticate with GitHub so they could read and
 
 The token goes in the URL *fragment* (`#token=xyz`), not the query string. Fragments never get sent to servers - they stay entirely client-side. Your static site grabs the token, stores it in localStorage, and clears the URL. Done.
 
-Cloudflare Workers run at the edge with a generous free tier. Deploy with `wrangler deploy` and forget about it. No containers, no scaling, no ops.
+Cloudflare Workers run at the edge with a generous free tier. Deploy with `wrangler deploy` and forget about it. No containers, no scaling, no ops. [My implementation is on GitHub](https://github.com/ianphil/tools/tree/master/cloudflare/github-oauth).
 
 ## The Catch
 
