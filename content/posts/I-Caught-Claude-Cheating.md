@@ -91,7 +91,7 @@ If an agent "fixes" a failing test by relaxing the threshold, the judge catches 
 
 If that Given/When/Then syntax looks familiar, it should. That's [Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development)... a pattern Dan North introduced in 2006. BDD was always about capturing intent, not just assertions. The idea that tests should describe behavior from the user's perspective, not implementation details.
 
-I didn't invent anything here. I just noticed that BDD's original insight—*why* matters more than *what*—becomes critical when an AI is writing the code.
+I didn't invent anything here. I just noticed that BDD's original insight... *why* matters more than *what*... becomes critical when an AI is writing the code.
 
 My workflow with AI had always been me running things and judging the results. Agent proposes, human evaluates. The assertion-based tests were trying to automate the "run things" part... but they were just recreating unit tests. pytest already exists. jest already exists. I wasn't adding anything new.
 
@@ -118,5 +118,7 @@ BDD always required a human to read the scenario and judge whether the implement
 What's different now is that the judge can be automated. An LLM can read "users perceive delays over 50ms as laggy" and understand that relaxing the threshold to 100ms violates the requirement, even if the assertion technically passes.
 
 It's an old pattern with a new capability. BDD gave us the format. LLMs gave us a judge that doesn't sleep.
+
+The testing pyramid has unit tests at the base, integration in the middle, e2e at the top. Where do intent tests fit? Maybe they're a layer above e2e... tests that check whether the thing you built is the thing you meant to build. Or maybe they're orthogonal, a different axis entirely. I'm not sure this changes the pyramid for anyone else. But it changes it for me, at least until the next model comes out and makes all of this obsolete.
 
 I caught Claude cheating once. Now I've made cheating harder.
