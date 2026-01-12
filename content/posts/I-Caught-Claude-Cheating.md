@@ -122,3 +122,31 @@ It's an old pattern with a new capability. BDD gave us the format. LLMs gave us 
 The testing pyramid has unit tests at the base, integration in the middle, e2e at the top. Where do intent tests fit? Maybe they're a layer above e2e... tests that check whether the thing you built is the thing you meant to build. Or maybe they're orthogonal, a different axis entirely. I'm not sure this changes the pyramid for anyone else. But it changes it for me, at least until the next model comes out and makes all of this obsolete.
 
 I caught Claude cheating once. Now I've made cheating harder... I hope.
+
+---
+
+## Appendix: Related Work
+
+There's a lot of activity in this space. Here's what I found and where my approach fits.
+
+### LLM-as-a-Judge (General)
+
+The pattern is well-established for evaluating LLM outputs. [Confident AI](https://www.confident-ai.com/blog/why-llm-as-a-judge-is-the-best-llm-evaluation-method), [Evidently AI](https://www.evidentlyai.com/llm-guide/llm-as-a-judge), [Arize](https://arize.com/llm-as-a-judge/), and [Patronus AI](https://www.patronus.ai/llm-testing/llm-as-a-judge) all have guides and products. There's even an [Awesome-LLM-as-a-judge](https://github.com/llm-as-a-judge/Awesome-LLM-as-a-judge) repo. But most focus on evaluating *LLM outputs* (chatbot responses, RAG quality), not code implementations against intent.
+
+### BDD + AI
+
+- **[BDDTestAIGen](https://www.scitepress.org/Papers/2025/133744/133744.pdf)** - Academic paper on using LLMs to *generate* BDD tests, not judge them
+- **[SuperSpec](https://medium.com/superagentic-ai/superspec-context-engineering-and-bdd-for-agentic-ai-3b826ca977eb)** - BDD for AI agents, treating the whole agent pipeline as the unit under test
+- **[Momentic](https://momentic.ai/blog/behavior-driven-development)** - AI to eliminate BDD's glue code layer
+- **[EDDOps](https://arxiv.org/html/2411.13768v3)** - "Evaluation-Driven Development" adapts TDD/BDD for non-deterministic LLM agents
+- **[LAJ Framework](https://arxiv.org/html/2512.01232)** - LLM-as-a-Judge for test coverage: "static tools measure what code is executed, while LAJ assesses whether executed tests address specified requirements"
+
+### The Gap
+
+Most work falls into one of three categories:
+
+1. Using LLMs to *generate* BDD tests (automation)
+2. Evaluating LLM *outputs* (chatbot responses, summarization quality)
+3. Using LLMs to *write* the glue code for traditional BDD
+
+What I'm doing is different: using the LLM as the *judge* of whether human-written (or AI-written) code satisfies human-written intent specs. The spec is the contract. The LLM evaluates semantic compliance, not just assertion matching. It's a small club, but apparently not empty.
