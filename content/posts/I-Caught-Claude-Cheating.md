@@ -121,4 +121,4 @@ It's an old pattern with a new capability. BDD gave us the format. LLMs gave us 
 
 The testing pyramid has unit tests at the base, integration in the middle, e2e at the top. Where do intent tests fit? Maybe they're a layer above e2e... tests that check whether the thing you built is the thing you meant to build. Or maybe they're orthogonal, a different axis entirely. I'm not sure this changes the pyramid for anyone else. But it changes it for me, at least until the next model comes out and makes all of this obsolete.
 
-I caught Claude cheating once. Now I've made cheating harder.
+I caught Claude cheating once. Now I've made cheating harder... I hope.
