@@ -1,0 +1,26 @@
+{{- $repo := "ianphil/ianphil.github.io" -}}
+{{- $blogUrl := "https://blog.ianp.io" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog Comments - ianp.io</title>
+    <link>{{ $blogUrl }}</link>
+    <description>Latest comments on blog posts at ianp.io</description>
+    <language>en-us</language>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</lastBuildDate>
+    <atom:link href="{{ $blogUrl }}/comments.xml" rel="self" type="application/rss+xml"/>
+    {{- /* Note: This is a placeholder. Actual comments should be fetched via API */ -}}
+    {{- /* To generate a complete feed, use the comments-feed.html page or a build-time script */ -}}
+    {{- range first 10 (where .Site.RegularPages "Section" "posts") }}
+    {{- if .Params.github_issue }}
+    <item>
+      <title>Comments on "{{ .Title }}"</title>
+      <link>https://github.com/{{ $repo }}/issues/{{ .Params.github_issue }}</link>
+      <guid isPermaLink="true">https://github.com/{{ $repo }}/issues/{{ .Params.github_issue }}</guid>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</pubDate>
+      <description>View comments on "{{ .Title }}" on GitHub</description>
+    </item>
+    {{- end }}
+    {{- end }}
+  </channel>
+</rss>

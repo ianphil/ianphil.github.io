@@ -1,10 +1,12 @@
 ---
 title: "AI Methodologies: Create a Library"
 date: 2025-12-30T10:00:00-05:00
+github_issue: 4
 draft: false
 tags:
   - ai
 ---
+
 ## **A Practical Method: Build a Verified Template Library**
 
 When a task repeats, you can capture the pattern as a template that produces a solid first draft. Templates make expectations explicit: inputs, constraints, checks, and what “done” looks like. The goal is not to automate judgment, it’s to reduce rework and make outcomes easier to verify. Over time, the library becomes a shared baseline that teams can use and improve when appropriate.

@@ -1,10 +1,12 @@
 ---
 title: "AI Methodologies: Build your Team"
 date: 2026-01-03T09:00:00-05:00
+github_issue: 3
 draft: false
 tags:
   - ai
 ---
+
 ## **A Practical Method: Invest in the Agentic Layer**
 
 In many cases, the fastest way to ship reliably with AI is to improve the layer around your systems that agents use: prompts, tool interfaces, guardrails, and verification. Instead of treating each AI interaction as a one-off, aim to make common work repeatable and measurable. When appropriate, spend a meaningful share of engineering time strengthening this layer so the next feature takes less effort and carries less risk.
