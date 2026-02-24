@@ -24,7 +24,7 @@ enableEmoji = true
     bio = 'Software Engineer at Microsoft<br/>I build stuff...'
     avatar = "/images/profile.jpg"
     aboutLink = "/page/about/"
-    tagline = "All posts are handcrafted."
+    tagline = "Not all posts are handcrafted."
 
   [params.social]
     github = "ianphil"
