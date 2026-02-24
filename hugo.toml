@@ -21,7 +21,7 @@ enableEmoji = true
 [params]
   [params.sidebar]
     name = "Ian"
-    bio = 'Software Engineer at Microsoft<br/>I build stuff...'
+    bio = 'Software Engineering Manager at Microsoft<br/>I build stuff...'
     avatar = "/images/profile.jpg"
     aboutLink = "/page/about/"
     tagline = "Not all posts are handcrafted."
