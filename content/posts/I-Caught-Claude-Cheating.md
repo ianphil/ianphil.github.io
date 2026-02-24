@@ -108,7 +108,7 @@ Both get evaluated. The test passes only if the implementation satisfies both th
 
 I don't miss the runners. They were just recreating testing patterns that already exist. The porting cookbook was useful... but porting code is a solved problem once you have good specs.
 
-The [skill](https://github.com/ianphil/my-skills/tree/main/skills/spec-tests) went from 511 lines to 137. Fewer features, but the right ones.
+The [skill](https://github.com/ianphil/my-skills/tree/main/spec-tests) went from 511 lines to 137. Fewer features, but the right ones.
 
 ## What's Actually New
 
