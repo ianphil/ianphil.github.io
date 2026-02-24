@@ -4,7 +4,8 @@ title = "Ian's Blog"
 theme = 'krausefx-hugo'
 ignoreFiles = ['_templates/']
 
-paginate = 5
+[pagination]
+  pagerSize = 5
 summaryLength = 70
 enableEmoji = true
 
