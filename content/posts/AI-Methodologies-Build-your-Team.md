@@ -3,6 +3,7 @@ title: "AI Methodologies: Build your Team"
 date: 2026-01-03T09:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 ## **A Practical Method: Invest in the Agentic Layer**

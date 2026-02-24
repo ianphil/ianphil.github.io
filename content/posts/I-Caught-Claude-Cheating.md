@@ -3,6 +3,7 @@ title: "I Caught Claude Cheating, So I Made It the Judge"
 date: 2026-01-19T23:50:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
   - testing
   - skills

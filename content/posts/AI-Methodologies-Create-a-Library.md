@@ -3,6 +3,7 @@ title: "AI Methodologies: Create a Library"
 date: 2025-12-30T10:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 ## **A Practical Method: Build a Verified Template Library**

@@ -3,6 +3,7 @@ title: "TIL: Building a Skill Marketplace"
 date: 2026-01-03T15:45:38-05:00
 draft: false
 tags:
+  - llm-generated
   - TIL
   - skills
   - ai

@@ -3,6 +3,7 @@ title: "TIL: OAuth for Static Sites (Without Losing Your Mind)"
 date: 2026-01-05T23:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - oauth
   - cloudflare-workers
   - static-sites

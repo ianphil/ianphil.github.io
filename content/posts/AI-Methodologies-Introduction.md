@@ -3,6 +3,7 @@ title: "AI Methodologies: Introduction"
 date: 2025-12-27T10:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 

@@ -3,6 +3,7 @@ title: "AI Methodologies: Do One Thing"
 date: 2026-01-02T10:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 ## **A Practical Method: Keep Agents Narrow, Make Results Verifiable**

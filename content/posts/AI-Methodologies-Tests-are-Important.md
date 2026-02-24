@@ -3,6 +3,7 @@ title: "AI Methodologies: Tests are Important"
 date: 2026-01-08T11:50:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 ## **A Practical Method: Build Verification Into the Loop**

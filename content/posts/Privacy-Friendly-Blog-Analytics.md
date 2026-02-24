@@ -3,6 +3,7 @@ title: Privacy-Friendly Blog Analytics (Without Selling Your Soul to Google)
 date: 2026-01-12T23:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - tools
   - analytics
   - val-town

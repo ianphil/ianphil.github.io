@@ -3,6 +3,7 @@ title: "AI Methodologies: Start with Intent"
 date: 2025-12-28T10:00:00-05:00
 draft: false
 tags:
+  - llm-generated
   - ai
 ---
 ## **A Practical Method: Work at the Intent Layer**
