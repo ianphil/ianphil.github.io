@@ -1,0 +1,31 @@
+{{ define "main" }}
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h1>
+    <p class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">
+        {{ .Date.Format "Jan 2, 2006" }}
+      </time>
+      {{ with .Site.Params.editURL }}
+        &nbsp;|&nbsp;
+        <a href="{{ . }}{{ $.File.Path }}" target="_blank" rel="noopener">Edit on GitHub</a>
+      {{ end }}
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    {{ .Content }}
+  </div>
+
+  <p class="extra-info">
+    {{ with .Params.tags }}
+      Tags: {{ delimit . ", " }} &nbsp;|&nbsp;
+    {{ end }}
+    {{ with $.Site.Params.editURL }}
+      <a href="{{ . }}{{ $.File.Path }}" target="_blank" rel="noopener">Edit on GitHub</a>
+    {{ end }}
+  </p>
+</article>
+{{ end }}

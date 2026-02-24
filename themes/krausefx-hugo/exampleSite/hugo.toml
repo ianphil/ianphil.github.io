@@ -1,0 +1,71 @@
+# Example hugo.toml for the KrauseFx-style theme
+# Copy this to your site root and customize
+
+baseURL = "https://blog.ianp.io/"
+languageCode = "en"
+title = "Ian's Blog"
+# theme = "krausefx-hugo"  # uncomment when using as a submodule
+
+# Pagination
+paginate = 5
+
+# Summary length (in words)
+summaryLength = 70
+
+# Enable emoji rendering
+enableEmoji = true
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  # Edit on GitHub link (optional, set to your repo's content path)
+  # editURL = "https://github.com/ianphil/blog/edit/main/content/"
+
+  # Custom HTML to inject into <head> (optional)
+  # customHead = '<link rel="icon" href="/favicon.ico">'
+
+  [params.sidebar]
+    name = "Ian"
+    bio = 'Software Engineer at Microsoft<br/>I build stuff...'
+    avatar = "/images/profile.jpg"
+    aboutLink = "/about/"
+    tagline = "All posts are handcrafted."
+
+    # Newsletter (optional - remove if not using)
+    # [params.sidebar.newsletter]
+    #   prompt = "Want to hear about new posts?"
+    #   action = "https://your-newsletter-service.com/subscribe"
+
+  [params.social]
+    github = "ianphil"
+    twitter = "0xIanPhil"
+    # bluesky = "yourhandle.bsky.social"
+    # mastodon = "https://mastodon.social/@yourhandle"
+    # linkedin = "yourhandle"
+    # Extra social links (array of {label, url})
+    # [[params.social.extra]]
+    #   label = "tools.ianp.io"
+    #   url = "https://tools.ianp.io"
+
+# Navigation menu
+[[menus.main]]
+  name = "Blog"
+  url = "/"
+  weight = 1
+
+[[menus.main]]
+  name = "Archive"
+  url = "/posts/"
+  weight = 2
+
+[[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 3

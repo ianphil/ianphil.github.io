@@ -1,5 +1,45 @@
 baseURL = 'https://blog.ianp.io/'
 languageCode = 'en-us'
 title = "Ian's Blog"
-theme = 'nostyleplease'
+theme = 'krausefx-hugo'
 ignoreFiles = ['_templates/']
+
+paginate = 5
+summaryLength = 70
+enableEmoji = true
+
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  [params.sidebar]
+    name = "Ian"
+    bio = 'Software Engineer at Microsoft<br/>I build stuff...'
+    avatar = "/images/profile.jpg"
+    aboutLink = "/page/about/"
+    tagline = "All posts are handcrafted."
+
+  [params.social]
+    github = "ianphil"
+    twitter = "0xIanPhil"
+
+[[menus.main]]
+  name = "Blog"
+  url = "/"
+  weight = 1
+
+[[menus.main]]
+  name = "Archive"
+  url = "/posts/"
+  weight = 2
+
+[[menus.main]]
+  name = "About"
+  url = "/page/about/"
+  weight = 3

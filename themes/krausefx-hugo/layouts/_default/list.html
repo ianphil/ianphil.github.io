@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="home">
+  {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
+  {{ range $paginator.Pages }}
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h1>
+      <p class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">
+          {{ .Date.Format "Jan 2, 2006" }}
+        </time>
+      </p>
+    </header>
+
+    <div class="post-content" itemprop="articleBody">
+      {{ if .Truncated }}
+        {{ .Summary }}
+        <p><a href="{{ .RelPermalink }}">Continue reading...</a></p>
+      {{ else }}
+        {{ .Content }}
+      {{ end }}
+    </div>
+
+    {{ with .Params.tags }}
+    <p class="extra-info">
+      Tags: {{ delimit . ", " }}
+    </p>
+    {{ end }}
+  </article>
+  {{ end }}
+
+  {{ if gt $paginator.TotalPages 1 }}
+  <div class="pagination">
+    {{ if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="previous">Newer</a>
+    {{ else }}
+      <span class="previous">Newer</span>
+    {{ end }}
+    /
+    {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="next">Older</a>
+    {{ else }}
+      <span class="next">Older</span>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

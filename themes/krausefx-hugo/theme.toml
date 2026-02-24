@@ -1,0 +1,10 @@
+name = "KrauseFx-style"
+license = "MIT"
+licenselink = "https://github.com/ianphil/blog/blob/main/LICENSE"
+description = "A clean, minimal blog theme with a right sidebar, inspired by krausefx.com"
+homepage = "https://blog.ianp.io"
+min_version = "0.112.0"
+
+[author]
+  name = "Ian"
+  homepage = "https://blog.ianp.io"

@@ -27,7 +27,17 @@
           {{ end }}
         </ul>
       </div>
+      <div class="footer-col footer-col-3">
+        {{ with .Site.Params.sidebar.newsletter }}
+        <p class="subscribe-newsletter">{{ .prompt | default "Want to hear about new posts?" }}</p>
+        {{ with .action }}
+        <form class="subscribe-form" action="{{ . }}" method="post" target="_blank">
+          <input type="text" name="email" placeholder="Email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+        {{ end }}
+        {{ end }}
+      </div>
     </div>
   </div>
 </footer>
-{{ partial "analytics.html" . }}
