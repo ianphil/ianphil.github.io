@@ -3,3 +3,4 @@ resources/_gen/
 .hugo_build.lock
 .obsidian/
 .DS_Store
+.env
