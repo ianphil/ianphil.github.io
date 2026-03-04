@@ -1,6 +1,6 @@
 ---
 title: "Genesis"
-date: 2026-03-04T00:00:00-05:00
+date: 2026-03-03T22:45:00-05:00
 draft: false
 tags:
   - ai
