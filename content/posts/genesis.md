@@ -22,3 +22,5 @@ mkdir mind\.github -Force | Out-Null; iwr https://aka.ms/genesis -OutFile mind\.
 ```
 
 Then say "Hi" 🧬
+
+![genesis](/images/genesis-moneypenny.png)
