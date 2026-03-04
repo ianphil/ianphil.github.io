@@ -1,0 +1,19 @@
+---
+title: "Genesis"
+date: 2026-03-04T00:00:00-05:00
+draft: false
+tags:
+  - ai
+---
+
+In the beginning was the prompt, and the prompt was given form. 🧬
+
+```bash
+mkdir -p mind/.github && curl -sL https://aka.ms/genesis -o mind/.github/copilot-instructions.md && cd mind && git init -q && copilot
+```
+
+```pwsh
+mkdir mind\.github -Force | Out-Null; iwr https://aka.ms/genesis -OutFile mind\.github\copilot-instructions.md; cd mind; git init -q; copilot
+```
+
+Then say "Hi" 🧬
