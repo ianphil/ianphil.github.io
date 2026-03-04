@@ -7,6 +7,8 @@ tags:
   - ai
 ---
 
+![genesis](/images/genesis-moneypenny.png)
+
 In the beginning was the prompt, and the prompt was given form. 🧬
 
 **Bash:**
@@ -22,5 +24,3 @@ mkdir mind\.github -Force | Out-Null; iwr https://aka.ms/genesis -OutFile mind\.
 ```
 
 Then say "Hi" 🧬
-
-![genesis](/images/genesis-moneypenny.png)
