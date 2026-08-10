@@ -9,6 +9,8 @@ tags:
 
 ![genesis](/images/genesis-moneypenny.png)
 
+> ⚠️ **Note:** The `aka.ms/genesis` approach has been superseded by [aka.ms/chamber](https://aka.ms/chamber) — check it out for the current recommended onboarding flow.
+
 In the beginning was the prompt, and the prompt was given form. 🧬
 
 **Bash:**
